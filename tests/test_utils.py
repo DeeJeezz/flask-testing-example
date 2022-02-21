@@ -36,3 +36,11 @@ def test_add_visit_counter(app_config, expected_value):
 def test_add_visit_counter_with_error():
     with pytest.raises(utils.VisitCounterUnconfiguredError):
         utils.add_visit_counter({}, 'test_page_name', logger=Mock())
+
+
+@pytest.mark.usefixtures('create_file')
+def test_file(file_path):
+    with open(file_path) as f:
+        content = f.read()
+
+    assert content == 'HELLO WORLD'
